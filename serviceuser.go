@@ -200,14 +200,14 @@ func (su *ServiceUser) CEcho() error {
 		}, nil)
 	event, ok := <-cs.upcallCh
 	if !ok {
-		return fmt.Println("Failed to receive C-ECHO response")
+		return fmt.Errorf("Failed to receive C-ECHO response")
 	}
 	resp, ok := event.command.(*dimse.CEchoRsp)
 	if !ok {
-		return fmt.Println("Invalid response for C-ECHO: %v", event.command)
+		return fmt.Errorf("Invalid response for C-ECHO: %v", event.command)
 	}
 	if resp.Status.Status != dimse.StatusSuccess {
-		err = fmt.Println("Non-OK status in C-ECHO response: %+v", resp.Status)
+		err = fmt.Errorf("Non-OK status in C-ECHO response: %+v", resp.Status)
 	}
 	return err
 }
