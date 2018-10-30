@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"net"
 
-	dicom "github.com/grailbio/go-dicom"
-	"github.com/grailbio/go-dicom/dicomio"
-	"github.com/grailbio/go-dicom/dicomlog"
-	"github.com/grailbio/go-netdicom/dimse"
-	"github.com/grailbio/go-netdicom/sopclass"
+	dicom "github.com/iyinin/dicom"
+	"github.com/iyinin/dicom/dicomio"
+	"github.com/iyinin/dicom/dicomlog"
+	"github.com/iyinin/netdicom/dimse"
+	"github.com/iyinin/netdicom/sopclass"
 )
 
 // CMoveResult is an object streamed by CMove implementation.
@@ -175,7 +175,7 @@ func handleCMove(
 			NumberOfRemainingSuboperations: uint16(resp.Remaining),
 			NumberOfCompletedSuboperations: numSuccesses,
 			NumberOfFailedSuboperations:    numFailures,
-			Status:                         dimse.Status{Status: dimse.StatusPending},
+			Status: dimse.Status{Status: dimse.StatusPending},
 		}, nil)
 	}
 	cs.sendMessage(&dimse.CMoveRsp{
@@ -184,7 +184,7 @@ func handleCMove(
 		CommandDataSetType:             dimse.CommandDataSetTypeNull,
 		NumberOfCompletedSuboperations: numSuccesses,
 		NumberOfFailedSuboperations:    numFailures,
-		Status:                         status}, nil)
+		Status: status}, nil)
 	// Drain the responses in case of errors
 	for range responseCh {
 	}
@@ -254,7 +254,7 @@ func handleCGet(
 			NumberOfRemainingSuboperations: uint16(resp.Remaining),
 			NumberOfCompletedSuboperations: numSuccesses,
 			NumberOfFailedSuboperations:    numFailures,
-			Status:                         dimse.Status{Status: dimse.StatusPending},
+			Status: dimse.Status{Status: dimse.StatusPending},
 		}, nil)
 		cs.disp.deleteCommand(subCs)
 	}
@@ -264,7 +264,7 @@ func handleCGet(
 		CommandDataSetType:             dimse.CommandDataSetTypeNull,
 		NumberOfCompletedSuboperations: numSuccesses,
 		NumberOfFailedSuboperations:    numFailures,
-		Status:                         status}, nil)
+		Status: status}, nil)
 	// Drain the responses in case of errors
 	for range responseCh {
 	}

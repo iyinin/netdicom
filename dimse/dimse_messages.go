@@ -5,9 +5,9 @@ package dimse
 import (
 	"fmt"
 
-	"github.com/grailbio/go-dicom"
-	"github.com/grailbio/go-dicom/dicomio"
-	"github.com/grailbio/go-dicom/dicomtag"
+	"github.com/iyinin/dicom"
+	"github.com/iyinin/dicom/dicomio"
+	"github.com/iyinin/dicom/dicomtag"
 )
 
 type CStoreRq struct {
